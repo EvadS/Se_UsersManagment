@@ -1,7 +1,33 @@
 ﻿
+@model   IEnumerable<UserManagmentMvc.EF.Entities.User>  
+
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+ 
+<div>
+  
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+            </tr>
+        }
+    </table>
+
+</div>
