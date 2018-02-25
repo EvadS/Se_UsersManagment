@@ -6,21 +6,33 @@ using System.Web;
 
 namespace UserManagmentMvc.Models.ViewModel
 {
-    public class User
+    public class UserVM
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
-        [Required]
+        [Required]      
+        [Display(Name = "First Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Last Name")]
         public string Surname { get; set; }
 
-        public User(UserManagmentMvc.EF.Entities.User user )
+        [Display(Name = "Middle Name")]
+        public string MidleName { get; set; }
+
+        public UserVM()
         {
-            this.Id = user.Id;
+
+        }
+
+        public UserVM(UserManagmentMvc.EF.Entities.User user )
+        {
+            this.ID = user.Id;
             this.Name = user.Name;
             this.Surname = user.Surname;
         }
+
+
     }
 
    

@@ -4,25 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using UserManagmentMvc.Abstract;
-using UserManagmentMvc.EF.Entities;
-using UserManagmentMvc.Repositories;
+using UserManagmentMvc.Models.ViewModel;
+using UserManagmentMvc.Services;
 
 namespace UserManagmentMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private BaseRepository<User> repo;
+        private UserService userService;
 
         public HomeController()
         {
-            repo = new UserRepository();
+            userService = new UserService();
         }
 
         // GET: Home
         public async Task<ActionResult> Index()
         {
-            IEnumerable<User> usersList = await repo.GetListAsync();
+            IEnumerable<UserVM> usersList = await userService.GetUsersList();
             return View(usersList);
         }
     }

@@ -1,5 +1,5 @@
-﻿
-@model   IEnumerable<UserManagmentMvc.EF.Entities.User>  
+﻿@using UserManagmentMvc.Extensions
+@model   IEnumerable<UserManagmentMvc.Models.ViewModel.UserVM>
 
 
 @{
@@ -8,26 +8,39 @@
 
 <h2>Index</h2>
 
- 
+
 <div>
-  
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-            </tr>
-        </thead>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Surname</td>
-            </tr>
-        }
-    </table>
+                    <th scope="col">
+                        @Html.mDisplayNameFor(m => m.Name)
+                    </th>
+                    <th scope="col">
+                        @Html.mDisplayNameFor(m => m.Surname)
+                    </th>
+                    <th scope="col">
+                        @Html.mDisplayNameFor(m => m.MidleName)
+                    </th>
+                </tr>
+            </thead>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Surname</td>
+                    <td>@item.MidleName</td>
+                    <td></td>
+
+                </tr>
+            }
+        </table>
+    }
 </div>
