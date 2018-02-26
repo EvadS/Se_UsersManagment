@@ -8,6 +8,10 @@
 
 <h2>Index</h2>
 
+<p>
+    <button class="btn-bootstrap-dialog"> Bootstrap Dialog Click Me </button>
+    <div class="modal fade" id="bootstrapDialog" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true" data-url='@Url.Action("BootstrapDialog", "Home")'></div>
+</p>
 
 <div>
 
@@ -44,3 +48,20 @@
         </table>
     }
 </div>
+
+
+<script>
+
+            $(document).ready(function () {
+
+                $('.btn-bootstrap-dialog').click(function () {
+                    var url = $('#bootstrapDialog').data('url');
+
+                    $.get(url, function (data) {
+                        $('#bootstrapDialog').html(data);
+
+                        $('#bootstrapDialog').modal('show');
+                    });
+                });
+            });
+</script>

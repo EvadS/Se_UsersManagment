@@ -24,5 +24,11 @@ namespace UserManagmentMvc.Controllers
             IEnumerable<UserVM> usersList = await userService.GetUsersList();
             return View(usersList);
         }
+
+
+        public ActionResult BootstrapDialog()
+        {
+            return PartialView();
+        }
     }
 }
