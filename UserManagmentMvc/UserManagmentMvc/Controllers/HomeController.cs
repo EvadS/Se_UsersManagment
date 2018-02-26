@@ -38,14 +38,14 @@ namespace UserManagmentMvc.Controllers
             }
 
             int intValue = id.Value;
-            var res = userService.GetUserSync(intValue);
+            var user = userService.GetUserSync(intValue);
 
-            if (res == null)
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
-            return PartialView("_Edit", res);
+            return PartialView("_Edit", user);
         }
 
 
@@ -55,8 +55,8 @@ namespace UserManagmentMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-               // db.Entry(address).State = EntityState.Modified;
-               // db.SaveChanges();
+                // db.Entry(address).State = EntityState.Modified;
+                // db.SaveChanges();
 
                 string url = Url.Action("Index", "Home", new { id = user.ID });
                 return Json(new { success = true, url = url });
@@ -67,25 +67,37 @@ namespace UserManagmentMvc.Controllers
         }
 
         #endregion
-        public ActionResult EditUser(UserVM user)
+
+        #region delete 
+      /*  public ActionResult Delete(int? id)
         {
-            try
+            if (id == null)
             {
-                var res =  userService.UpdateUser(user);
-
-                if (res)
-                    return RedirectToAction("Index");
-                else
-                    return View(user);
-            }
-            catch (DataException  dex )
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(user);
+            int intValue = id.Value;
+            var user = userService.GetUserSync(intValue);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_Delete", user);
         }
+
+    */
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+           var res =  userService.Delete(id);
+
+            return RedirectToAction("Index");
+
+        }
+
+        #endregion 
 
     }
 }

@@ -170,9 +170,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Views\Home\BootstrapDialog.cshtml" />
     <Content Include="Views\Home\_Edit.cshtml" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\Home\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

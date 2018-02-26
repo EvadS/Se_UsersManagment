@@ -55,7 +55,7 @@ namespace UserManagmentMvc.Services
             }
         }
 
-        public  bool UpdateUser(UserVM userVM)
+        public bool UpdateUser(UserVM userVM)
         {
             // TODO synhronus version 
             bool result = false;
@@ -68,7 +68,7 @@ namespace UserManagmentMvc.Services
                 Patronymic = userVM.MidleName
             };
 
-            if (userVM.ID>0)
+            if (userVM.ID > 0)
             {
                 repo.Update(user);
             }
@@ -77,9 +77,9 @@ namespace UserManagmentMvc.Services
                 repo.Create(user);
             }
 
-             
+
             repo.Save();
-            return  result;
+            return result;
         }
 
 
@@ -87,7 +87,7 @@ namespace UserManagmentMvc.Services
         {
             if (userID > 0)
             {
-                var user = ( repo.GetItem(userID));
+                var user = (repo.GetItem(userID));
 
                 return new UserVM()
                 {
@@ -101,6 +101,25 @@ namespace UserManagmentMvc.Services
             {
                 return new UserVM();
             }
+        }
+
+        public bool Delete(int userID)
+        {
+            try
+            {
+                repo.Delete(userID);
+                repo.Save();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return true;
+            }
+        }
+
+        public bool ExistUser(int userID)
+        {
+            return repo.GetItem(userID) != null;
         }
     }
 }
