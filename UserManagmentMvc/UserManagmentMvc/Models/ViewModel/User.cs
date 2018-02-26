@@ -14,9 +14,11 @@ namespace UserManagmentMvc.Models.ViewModel
         [Display(Name = "First Name")]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
         public string Surname { get; set; }
 
+        [Required]
         [Display(Name = "Middle Name")]
         public string MidleName { get; set; }
 

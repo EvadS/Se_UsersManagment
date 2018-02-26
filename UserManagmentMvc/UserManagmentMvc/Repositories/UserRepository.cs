@@ -38,6 +38,11 @@ namespace UserManagmentMvc.Repositories
             return db.Users.Find(id);
         }
 
+        public async Task<User> GetItemAsync(int id)
+        {
+            return await db.Users.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
         public IEnumerable<User> GetList()
         {
             return db.Users.ToList();

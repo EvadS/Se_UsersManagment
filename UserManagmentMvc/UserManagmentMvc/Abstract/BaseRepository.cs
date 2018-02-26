@@ -15,6 +15,8 @@ namespace UserManagmentMvc.Abstract
 
         T GetItem(int id);
 
+        Task<T> GetItemAsync(int id);
+
         void Create(T item);
         void Update(T item);
         void Delete(int id);

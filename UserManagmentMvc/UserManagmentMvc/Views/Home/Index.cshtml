@@ -8,10 +8,6 @@
 
 <h2>Index</h2>
 
-<p>
-    <button class="btn-bootstrap-dialog"> Bootstrap Dialog Click Me </button>
-    <div class="modal fade" id="bootstrapDialog" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true" data-url='@Url.Action("BootstrapDialog", "Home")'></div>
-</p>
 
 <div>
 
@@ -31,6 +27,7 @@
                     <th scope="col">
                         @Html.mDisplayNameFor(m => m.MidleName)
                     </th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -41,7 +38,11 @@
                     <td>@item.Name</td>
                     <td>@item.Surname</td>
                     <td>@item.MidleName</td>
-                    <td></td>
+
+                    <td>
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil'></span>", "Edit", "Edit", "Home", routeValues: new { id = item.ID }, htmlAttributes: new { data_modal = "", @class = "btn btn-default" })
+
+                    </td>
 
                 </tr>
             }
@@ -49,19 +50,52 @@
     }
 </div>
 
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
 
-<script>
 
-            $(document).ready(function () {
+<script type="text/javascript">
 
-                $('.btn-bootstrap-dialog').click(function () {
-                    var url = $('#bootstrapDialog').data('url');
 
-                    $.get(url, function (data) {
-                        $('#bootstrapDialog').html(data);
+    $(function () {
+        $.ajaxSetup({ cache: false });
 
-                        $('#bootstrapDialog').modal('show');
-                    });
-                });
+        $("a[data-modal]").on("click", function (e) {
+
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    /*backdrop: 'static',*/
+                    keyboard: true
+                }, 'show');
+                bindForm(this);
             });
+            return false;
+        });
+    });
+
+    function bindForm(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        $('#myModal').modal('hide');
+                        $('#replacetarget').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+                    } else {
+                        $('#myModalContent').html(result);
+                        bindForm(dialog);
+                    }
+                }
+            });
+            return false;
+        });
+    }
 </script>
