@@ -55,6 +55,33 @@ namespace UserManagmentMvc.Services
             }
         }
 
+        public bool CreateUser(UserVM userVM)
+        {
+            User user = new User()
+            {
+                Id = userVM.ID,
+                Name = userVM.Name,
+                Surname = userVM.Surname,
+                Patronymic = userVM.MidleName,
+                Employed = userVM.IsEmployed,
+                OrganisationName = userVM.OrganisationName,
+                phoneNumber = userVM.phoneNumber,
+                StartOnUTc = userVM.StartOnUTc
+            };
+
+            try
+            {
+                repo.Create(user);
+                repo.Save();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool UpdateUser(UserVM userVM)
         {
             // TODO synhronus version 

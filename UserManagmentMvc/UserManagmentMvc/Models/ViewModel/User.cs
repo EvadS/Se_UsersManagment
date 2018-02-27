@@ -22,6 +22,22 @@ namespace UserManagmentMvc.Models.ViewModel
         [Display(Name = "Middle Name")]
         public string MidleName { get; set; }
 
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Required")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Not a number")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile")]
+        public string phoneNumber { get; set; }
+
+        [Display(Name = "Is employed")]
+        public bool IsEmployed { get; set; }
+
+        [Display(Name = "Organisation name")]
+        public string OrganisationName { get; set; }
+
+        [Display(Name= "Employment date")]
+        [DataType(DataType.Date)]
+        public DateTime StartOnUTc { get; set; }
+
         public UserVM()
         {
 
