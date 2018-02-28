@@ -28,7 +28,7 @@ namespace UserManagmentMvc.Services
                 {
                     ID = x.Id,
                     Name = x.Name,
-                    Surname = x.Surname,
+                    LastName = x.Surname,
                     MidleName = x.Patronymic
                 }).ToList();
 
@@ -45,7 +45,7 @@ namespace UserManagmentMvc.Services
                 {
                     ID = user.Id,
                     Name = user.Name,
-                    Surname = user.Surname,
+                    LastName = user.Surname,
                     MidleName = user.Patronymic
                 };
             }
@@ -61,11 +61,11 @@ namespace UserManagmentMvc.Services
             {
                 Id = userVM.ID,
                 Name = userVM.Name,
-                Surname = userVM.Surname,
+                Surname = userVM.LastName,
                 Patronymic = userVM.MidleName,
                 Employed = userVM.IsEmployed,
                 OrganisationName = userVM.OrganisationName,
-                phoneNumber = userVM.phoneNumber,
+                phoneNumber = userVM.PhoneNumber,
                 StartOnUTc = userVM.StartOnUTc
             };
 
@@ -91,7 +91,7 @@ namespace UserManagmentMvc.Services
             {
                 Id = userVM.ID,
                 Name = userVM.Name,
-                Surname = userVM.Surname,
+                Surname = userVM.LastName,
                 Patronymic = userVM.MidleName
             };
 
@@ -120,7 +120,7 @@ namespace UserManagmentMvc.Services
                 {
                     ID = user.Id,
                     Name = user.Name,
-                    Surname = user.Surname,
+                    LastName = user.Surname,
                     MidleName = user.Patronymic
                 };
             }

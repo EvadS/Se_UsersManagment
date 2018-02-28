@@ -7,7 +7,6 @@
 }
 
 <div>
-
     <div class="row">
         @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span>", "Add", "Create", "Home", null, htmlAttributes: new { data_modal = "", @class = "btn btn-primary pull-right" })
     </div>
@@ -23,7 +22,7 @@
                         @Html.mDisplayNameFor(m => m.Name)
                     </th>
                     <th scope="col">
-                        @Html.mDisplayNameFor(m => m.Surname)
+                        @Html.mDisplayNameFor(m => m.MidleName)
                     </th>
                     <th scope="col">
                         @Html.mDisplayNameFor(m => m.MidleName)
@@ -37,7 +36,7 @@
                 <tr>
                     <td>@item.ID</td>
                     <td>@item.Name</td>
-                    <td>@item.Surname</td>
+                    <td>@item.MidleName</td>
                     <td>@item.MidleName</td>
 
                     <td>
@@ -152,4 +151,7 @@
 
         $('#exampleModalCenter').modal('hide');
     });
+
+
+
 </script>
