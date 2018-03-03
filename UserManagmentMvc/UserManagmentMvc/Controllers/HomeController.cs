@@ -37,7 +37,7 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] UserVM user)
+        public ActionResult Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
