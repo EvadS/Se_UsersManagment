@@ -18,14 +18,14 @@ namespace UserManagmentMvc.Models.ViewModel
         [Required(ErrorMessage = "Last Name is required field")]
         public string LastName { get; set; }
 
-
+        [Display(Name = "Middle Name")]
         [Required(ErrorMessage = "Middle Name is required field")]
         public string MidleName { get; set; }
 
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Phone Number is required field ")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Not a number")]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile")]
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile. Number should be is 10 digits.")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Is employed")]

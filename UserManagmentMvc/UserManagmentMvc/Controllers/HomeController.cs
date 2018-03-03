@@ -41,7 +41,7 @@ namespace UserManagmentMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                string url = Url.Action("Index", "Home", new { id = user.ID });
+                string url = Url.Action("Index", "Home");
                 if (userService.CreateUser(user))
                 {
                     return Json(new { success = true, url = url });
@@ -79,15 +79,22 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] UserVM user)
+        public ActionResult Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 // db.Entry(address).State = EntityState.Modified;
                 // db.SaveChanges();
 
-                string url = Url.Action("Index", "Home", new { id = user.ID });
-                return Json(new { success = true, url = url });
+
+                string url = Url.Action("Index", "Home");
+                if (userService.UpdateUser(user))
+                {
+                    return Json(new { success = true, url = url });
+                }
+
+                return Json(new { success = false, url = url });
+
             }
 
 

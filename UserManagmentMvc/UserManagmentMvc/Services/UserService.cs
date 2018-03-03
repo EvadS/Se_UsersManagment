@@ -76,7 +76,7 @@ namespace UserManagmentMvc.Services
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -92,7 +92,12 @@ namespace UserManagmentMvc.Services
                 Id = userVM.ID,
                 Name = userVM.Name,
                 Surname = userVM.LastName,
-                Patronymic = userVM.MidleName
+                Patronymic = userVM.MidleName,
+                Employed = userVM.IsEmployed,
+                OrganisationName = userVM.OrganisationName,
+                phoneNumber = userVM.PhoneNumber,
+                StartOnUTc = userVM.StartOnUTc
+
             };
 
             if (userVM.ID > 0)
@@ -121,7 +126,11 @@ namespace UserManagmentMvc.Services
                     ID = user.Id,
                     Name = user.Name,
                     LastName = user.Surname,
-                    MidleName = user.Patronymic
+                    MidleName = user.Patronymic,
+                    IsEmployed  = user.Employed,
+                    OrganisationName = user.OrganisationName,
+                    PhoneNumber = user.phoneNumber,
+                    StartOnUTc = user.StartOnUTc
                 };
             }
             else
