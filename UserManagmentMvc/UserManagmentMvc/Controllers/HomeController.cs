@@ -23,7 +23,7 @@ namespace UserManagmentMvc.Controllers
         // GET: Home
         public async Task<ActionResult> Index()
         {
-            IEnumerable<UserVM> usersList = await userService.GetUsersList();
+            IEnumerable<UserVM> usersList = await userService.GetUsersListAsync();
             return View(usersList);
         }
 
@@ -37,18 +37,18 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public async Task<ActionResult> Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 string url = Url.Action("Index", "Home");
-                if (userService.CreateUser(user))
+                var res =   userService.CreateUserAsync(user);
+                if (res.Result)
                 {
                     return Json(new { success = true, url = url });
                 }
 
-                return Json(new { success = false, url = url });
-
+                return   Json(new { success = false, url = url });
             }
 
 
@@ -57,7 +57,7 @@ namespace UserManagmentMvc.Controllers
 
 
         #region edit actions 
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@ namespace UserManagmentMvc.Controllers
             }
 
             int intValue = id.Value;
-            var user = userService.GetUserSync(intValue);
+            var user = await userService.GetUserAsync(intValue);
 
             if (user == null)
             {
@@ -79,24 +79,18 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
-                // db.Entry(address).State = EntityState.Modified;
-                // db.SaveChanges();
-
-
                 string url = Url.Action("Index", "Home");
-                if (userService.UpdateUser(user))
+                if (await userService.UpdateUserAsync(user))
                 {
                     return Json(new { success = true, url = url });
                 }
 
                 return Json(new { success = false, url = url });
-
             }
-
 
             return PartialView("_Edit", user);
         }
@@ -104,7 +98,7 @@ namespace UserManagmentMvc.Controllers
         #endregion
 
         #region delete 
-          public ActionResult Delete(int? id)
+          public async  Task<ActionResult> Delete(int? id)
           {
               if (id == null)
               {
@@ -112,7 +106,7 @@ namespace UserManagmentMvc.Controllers
               }
 
               int intValue = id.Value;
-              var user = userService.GetUserSync(intValue);
+              var user =  await userService.GetUserAsync(intValue);
 
               if (user == null)
               {
@@ -126,13 +120,15 @@ namespace UserManagmentMvc.Controllers
         [HttpPost, ActionName("Delete")] 
         public ActionResult DeleteConfirmed(int id)
         {
-            var res = userService.Delete(id);
+            var res = userService.DeleteAsync(id);
          
             string url = Url.Action("Index", "Home");
+
+            TempData["Message"] = "Record was deleted.";
+
             return Json(new { success = true, url = url });
         }
 
         #endregion 
-
     }
 }

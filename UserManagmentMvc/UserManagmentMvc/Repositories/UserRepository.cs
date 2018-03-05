@@ -26,6 +26,8 @@ namespace UserManagmentMvc.Repositories
             db.Users.Add(item);
         }
 
+
+
         public void Delete(int id)
         {
             User item = db.Users.Find(id);
@@ -51,6 +53,12 @@ namespace UserManagmentMvc.Repositories
         public void Save()
         {
             db.SaveChanges();
+        }
+
+        public async  Task<int>  SaveAsync()
+        {
+            return await db.SaveChangesAsync();
+         
         }
 
         public void Update(User item)

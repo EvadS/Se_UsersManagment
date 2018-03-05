@@ -139,7 +139,7 @@
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
     <Content Include="scripts\jquery.datetimepicker.js" />
-    <Content Include="scripts\modalform.js" />
+    <Content Include="scripts\modalForm.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />

@@ -19,7 +19,7 @@ namespace UserManagmentMvc.Services
             repo = new UserRepository();
         }
 
-        public async Task<List<UserVM>> GetUsersList()
+        public async Task<List<UserVM>> GetUsersListAsync()
         {
             List<UserManagmentMvc.Models.ViewModel.UserVM> result = null;
 
@@ -35,7 +35,7 @@ namespace UserManagmentMvc.Services
             return res;
         }
 
-        public async Task<UserVM> GetUser(int userID)
+        public async Task<UserVM> GetUserAsync(int userID)
         {
             if (userID > 0)
             {
@@ -46,7 +46,11 @@ namespace UserManagmentMvc.Services
                     ID = user.Id,
                     Name = user.Name,
                     LastName = user.Surname,
-                    MidleName = user.Patronymic
+                    MidleName = user.Patronymic,
+                    IsEmployed = user.Employed,
+                    OrganisationName = user.OrganisationName,
+                    PhoneNumber = user.phoneNumber,
+                    StartOnUTc = user.StartOnUTc
                 };
             }
             else
@@ -75,6 +79,32 @@ namespace UserManagmentMvc.Services
                 repo.Save();
 
                 return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CreateUserAsync(UserVM userVM)
+        {
+            User user = new User()
+            {
+                Id = userVM.ID,
+                Name = userVM.Name,
+                Surname = userVM.LastName,
+                Patronymic = userVM.MidleName,
+                Employed = userVM.IsEmployed,
+                OrganisationName = userVM.OrganisationName,
+                phoneNumber = userVM.PhoneNumber,
+                StartOnUTc = userVM.StartOnUTc
+            };
+
+            try
+            {
+                repo.Create(user);
+                var res = await repo.SaveAsync();
+                return res > 0;
             }
             catch (Exception ex)
             {
@@ -114,7 +144,33 @@ namespace UserManagmentMvc.Services
             return result;
         }
 
+        public async Task<bool> UpdateUserAsync(UserVM userVM)
+        {
+            User user = new User()
+            {
+                Id = userVM.ID,
+                Name = userVM.Name,
+                Surname = userVM.LastName,
+                Patronymic = userVM.MidleName,
+                Employed = userVM.IsEmployed,
+                OrganisationName = userVM.OrganisationName,
+                phoneNumber = userVM.PhoneNumber,
+                StartOnUTc = userVM.StartOnUTc
 
+            };
+
+            if (userVM.ID > 0)
+            {
+                repo.Update(user);
+            }
+            else
+            {
+                repo.Create(user);
+            }
+
+            var operationResult = await repo.SaveAsync();
+            return operationResult > 0;
+        }
         public UserVM GetUserSync(int userID)
         {
             if (userID > 0)
@@ -127,7 +183,7 @@ namespace UserManagmentMvc.Services
                     Name = user.Name,
                     LastName = user.Surname,
                     MidleName = user.Patronymic,
-                    IsEmployed  = user.Employed,
+                    IsEmployed = user.Employed,
                     OrganisationName = user.OrganisationName,
                     PhoneNumber = user.phoneNumber,
                     StartOnUTc = user.StartOnUTc
@@ -139,12 +195,12 @@ namespace UserManagmentMvc.Services
             }
         }
 
-        public bool Delete(int userID)
+        public async Task<bool> DeleteAsync(int userID)
         {
             try
             {
                 repo.Delete(userID);
-                repo.Save();
+                await repo.SaveAsync();
                 return true;
             }
             catch (Exception ex)
@@ -153,9 +209,9 @@ namespace UserManagmentMvc.Services
             }
         }
 
-        public bool ExistUser(int userID)
+        public async Task<bool> ExistUser(int userID)
         {
-            return repo.GetItem(userID) != null;
+            return await repo.GetItemAsync(userID) != null;
         }
     }
 }

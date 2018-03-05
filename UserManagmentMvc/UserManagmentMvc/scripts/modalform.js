@@ -1,20 +1,10 @@
-﻿// modalform.js
-
+﻿
 $(function () {
     $.ajaxSetup({ cache: false });
-
     $("a[data-modal]").on("click", function (e) {
-        // hide dropdown if any (this is used wehen invoking modal from link in bootstrap dropdown )
-        //$(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
-
+        console.log('(a[data-modal])');
         $('#myModalContent').load(this.href, function () {
-
-            console.log('(#myModalContent).load');
-
-            $('#myModal').modal({
-                /*backdrop: 'static',*/
-                keyboard: true
-            }, 'show');
+            $('#myModal').modal({ keyboard: true }, 'show');
             bindForm(this);
         });
         return false;
@@ -23,6 +13,8 @@ $(function () {
 
 function bindForm(dialog) {
     $('form', dialog).submit(function () {
+
+        console.log('dialog submit ');
         $.ajax({
             url: this.action,
             type: this.method,
@@ -31,6 +23,8 @@ function bindForm(dialog) {
                 if (result.success) {
                     $('#myModal').modal('hide');
                     $('#replacetarget').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+
+                    window.location = result.url;
                 } else {
                     $('#myModalContent').html(result);
                     bindForm(dialog);
