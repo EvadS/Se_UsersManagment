@@ -104,7 +104,7 @@ namespace UserManagmentMvc.Controllers
         #endregion
 
         #region delete 
-        /*  public ActionResult Delete(int? id)
+          public ActionResult Delete(int? id)
           {
               if (id == null)
               {
@@ -122,14 +122,14 @@ namespace UserManagmentMvc.Controllers
               return PartialView("_Delete", user);
           }
 
-      */
-        [HttpPost, ActionName("Delete")]
+      
+        [HttpPost, ActionName("Delete")] 
         public ActionResult DeleteConfirmed(int id)
         {
             var res = userService.Delete(id);
-
-            return RedirectToAction("Index");
-
+         
+            string url = Url.Action("Index", "Home");
+            return Json(new { success = true, url = url });
         }
 
         #endregion 
