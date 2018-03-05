@@ -2,6 +2,11 @@
 @model   IEnumerable<UserManagmentMvc.Models.ViewModel.UserVM>
 
 
+@if(TempData["message"] != null)
+{
+    <div class="alert-success"> @TempData["message"]</div>
+}
+
 @{
     ViewBag.Title = "Index";
 }

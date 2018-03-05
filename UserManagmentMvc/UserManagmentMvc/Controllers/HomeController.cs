@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UserManagmentMvc.Models.ViewModel;
+
 using UserManagmentMvc.Services;
 
 namespace UserManagmentMvc.Controllers
@@ -15,9 +16,10 @@ namespace UserManagmentMvc.Controllers
     {
         private UserService userService;
 
+
         public HomeController()
         {
-            userService = new UserService();
+            userService = new UserService();          
         }
 
         // GET: Home
@@ -32,7 +34,7 @@ namespace UserManagmentMvc.Controllers
             var user = new UserVM();
             ViewBag.ModalTitle = "Create new customer";
 
-            return PartialView("_Edit", user);
+            return PartialView("_EditPerson", user);
         }
 
         [HttpPost]
@@ -52,7 +54,7 @@ namespace UserManagmentMvc.Controllers
             }
 
 
-            return PartialView("_Edit", user);
+            return PartialView("_EditPerson", user);
         }
 
 
@@ -73,7 +75,7 @@ namespace UserManagmentMvc.Controllers
             }
 
             ViewBag.ModalTitle = "Edit customer";
-            return PartialView("_Edit", user);
+            return PartialView("_EditPerson", user);
         }
 
 
@@ -92,7 +94,7 @@ namespace UserManagmentMvc.Controllers
                 return Json(new { success = false, url = url });
             }
 
-            return PartialView("_Edit", user);
+            return PartialView("_EditPerson", user);
         }
 
         #endregion
