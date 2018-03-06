@@ -23,9 +23,16 @@ namespace UserManagmentMvc.App_Start
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                       "~/scripts/jquery.datetimepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modalForm").Include(
+                      "~/scripts/jquery.modalForm.js"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/jquery.datetimepicker.css"));            
         }
     }
 }
