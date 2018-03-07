@@ -6,8 +6,9 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using UserManagmentMvc.Models.ViewModel;
-
+using UserManagment.BLL.Abstract;
+using UserManagment.BLL.Concrete;
+using UserManagment.Models;
 using UserManagmentMvc.Services;
 
 namespace UserManagmentMvc.Controllers
@@ -16,17 +17,19 @@ namespace UserManagmentMvc.Controllers
     {
         private UserService userService;
 
+        private IBusinessLogic businesService;
+
 
         public HomeController()
         {
-            userService = new UserService();          
+            businesService = new BusinessLogic();           
         }
 
         // GET: Home
         public async Task<ActionResult> Index()
         {
-            IEnumerable<UserVM> usersList = await userService.GetUsersListAsync();
-            return View(usersList);
+           
+            return View(new List<UserVM>());
         }
 
         public ActionResult Create()

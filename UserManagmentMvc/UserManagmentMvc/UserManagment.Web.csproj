@@ -185,15 +185,11 @@
     <Compile Include="App_Start\Constants.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="EF\Entities\User.cs" />
-    <Compile Include="EF\UserManagmenInitializer.cs" />
-    <Compile Include="EF\UserManagmentContext.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\LinkHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -221,8 +217,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="EF\" />
+    <Folder Include="Models\" />
     <Folder Include="Services\Abstract\" />
     <Folder Include="Services\Concrete\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserManagment.BLL\UserManagment.BLL.csproj">
+      <Project>{17eb1794-455d-4372-aecf-b738f39f4eda}</Project>
+      <Name>UserManagment.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagment.DataEntities\UserManagment.DataEntities.csproj">
+      <Project>{7895d440-d4a2-427f-b4cc-ce1d1b791589}</Project>
+      <Name>UserManagment.DataEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagment.Models\UserManagment.Models.csproj">
+      <Project>{217d9b59-975c-4c3b-8cc3-ed1a2ab34b29}</Project>
+      <Name>UserManagment.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

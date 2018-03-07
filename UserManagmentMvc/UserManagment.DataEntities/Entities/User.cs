@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UserManagmentMvc.EF.Entities
+namespace UserManagment.DataEntities.Entities
 {
     public class User
     {
@@ -15,6 +16,5 @@ namespace UserManagmentMvc.EF.Entities
         public bool Employed { get; set; }
         public string OrganisationName { get; set; }
         public DateTime StartOnUTc { get; set; }
-
     }
 }

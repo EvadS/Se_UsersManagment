@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using UserManagment.DataEntities.Entities;
 using UserManagmentMvc.Abstract;
-using UserManagmentMvc.EF;
-using UserManagmentMvc.EF.Entities;
+
 
 namespace UserManagmentMvc.Repositories
 {

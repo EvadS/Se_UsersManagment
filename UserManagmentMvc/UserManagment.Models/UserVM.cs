@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UserManagmentMvc.Models.ViewModel
+namespace UserManagment.Models
 {
     public class UserVM
     {
@@ -41,17 +42,6 @@ namespace UserManagmentMvc.Models.ViewModel
         public UserVM()
         {
             StartOnUTc = DateTime.Now;
-        }
-
-        public UserVM(UserManagmentMvc.EF.Entities.User user)
-        {
-            this.ID = user.Id;
-            this.Name = user.Name;
-            this.LastName = user.Surname;
-        }
-
-
+        }              
     }
-
-
 }
