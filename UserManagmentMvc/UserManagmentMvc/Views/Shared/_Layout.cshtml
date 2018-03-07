@@ -7,7 +7,14 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />\   
 
     @Styles.Render("~/Content/css")  
- 
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Scripts.Render("~/bundles/modalForm")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,12 +37,9 @@
     <div class="container body-content">
         @RenderBody()
 
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+      
 
-        @Scripts.Render("~/bundles/datetimepicker")
-        @Scripts.Render("~/bundles/modalForm")
+
         @RenderSection("scripts", required: false)
 
         <hr />
