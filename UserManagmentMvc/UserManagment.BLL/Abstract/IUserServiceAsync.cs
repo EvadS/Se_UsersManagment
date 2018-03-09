@@ -9,11 +9,13 @@ namespace UserManagment.BLL.Abstract
 {
     public  interface IUserServiceAsync
     {
-        Task<List<UserVM>> GetUsersList();
+        Task<List<UserVM>> GetUsersList(int page, int perPage);
         Task<bool> CreateUser(UserVM userVM);
         Task<bool> UpdateUser(UserVM userVM);
         Task<UserVM> GetUser(int userID);
         Task<bool> DeleteUser(int userID);
         Task<bool> ExistsUser(int userID);
+    
+
     }
 }

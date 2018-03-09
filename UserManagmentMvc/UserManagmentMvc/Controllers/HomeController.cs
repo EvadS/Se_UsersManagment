@@ -10,16 +10,19 @@ namespace UserManagmentMvc.Controllers
     public class HomeController : Controller
     {
         private IUserServiceAsync businesService;
-
+        private const int RowNumOnPage = 10;
         public HomeController(IUserServiceAsync _businesService)
         {
             businesService = _businesService;
         }
 
         // GET: Home
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index( int? page)
         {
-            IEnumerable<UserVM> usersList = await businesService.GetUsersList();
+            var pageIndex = (page ?? 1) ;
+                     
+
+            IEnumerable<UserVM> usersList = await businesService.GetUsersList(pageIndex, RowNumOnPage);
             return View(usersList);
         }
 

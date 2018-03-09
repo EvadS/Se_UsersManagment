@@ -27,6 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.BLL", "UserMa
 		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0} = {33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{679C1AF0-815D-4211-997F-BA0B37FAE13E}"
+	ProjectSection(SolutionItems) = preProject
+		Toutorials.txt = Toutorials.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

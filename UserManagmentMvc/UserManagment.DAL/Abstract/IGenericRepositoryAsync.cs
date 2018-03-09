@@ -26,6 +26,7 @@ namespace UserManagment.DAL.Abstract
         T Get(int id);
         IQueryable<T> GetAll();
         Task<ICollection<T>> GetAllAsyncs();
+        Task<ICollection<T>> GetAllAsyncs(int currentPage, int num );
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
         Task<T> GetAsync(int id);
         void Save();
@@ -33,5 +34,13 @@ namespace UserManagment.DAL.Abstract
       
         T Update(T t, object key);
         Task<T> UpdateAsyn(T t, object key);
+
+        IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, int skip = 0, int takesNum = 0, params Expression<Func<T, object>>[] includeProperties);
+
+
+
+        Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int skip, int takesNum, params Expression<Func<T, object>>[] includeProperties);
+
+
     }
 }

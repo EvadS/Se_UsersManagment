@@ -54,12 +54,12 @@ namespace UserManagment.BLL.Concrete
         {
             try
             {
-                var user =  await _userRepository.GetAsync(userID);
+                var user = await _userRepository.GetAsync(userID);
 
                 if (user == null)
                     return false;
 
-                int res = await  _userRepository.DeleteAsyn(user);
+                int res = await _userRepository.DeleteAsyn(user);
                 await _userRepository.SaveAsync();
 
                 return true;
@@ -99,9 +99,23 @@ namespace UserManagment.BLL.Concrete
             }
         }
 
-        public async Task<List<UserVM>> GetUsersList()
+        private IOrderedQueryable<User> OrderingMethod(IQueryable<User> query)
         {
-            var res = (await _userRepository.GetAllAsyncs())
+            return query.OrderBy(user => user.Id);
+        }
+
+
+        public async Task<List<UserVM>> GetUsersList(int page, int perPage)
+        {
+
+            int skip = 0;
+            if (page == 0)
+                skip = 0;
+            else
+                skip = ((page - 1) * perPage);
+
+            Func<IQueryable<User>, IOrderedQueryable<User>> orderingFunc = query => query.OrderBy(student => student.Id);
+            var res = (await _userRepository.GetAsync(filter: null, takesNum: perPage, skip: skip, orderBy: orderingFunc))
                .Select(x => new UserVM
                {
                    ID = x.Id,

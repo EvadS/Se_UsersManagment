@@ -217,12 +217,110 @@ namespace UserManagment.DAL.Concrete
             GC.SuppressFinalize(this);
         }
 
-       async Task<bool> IGenericRepositoryAsync<T>.AddAsync(T t)
+        async Task<bool> IGenericRepositoryAsync<T>.AddAsync(T t)
         {
             dbContext.Set<T>().Add(t);
 
             int rese = await dbContext.SaveChangesAsync();
             return rese > 0;
+        }
+
+        public async Task<ICollection<T>> GetAllAsyncs(int currentPage, int num)
+        {
+            throw new NotImplementedException();
+
+            //return await dbContext.Set<T>().OrderBy().Skip(currentPage * num).Take(num).ToListAsync();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="orderBy"></param>
+        /// <param name="includeProperties"></param>
+        /// <returns></returns>
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, int skip = 0, int takesNum = 0, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = dbContext.Set<T>();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                if (takesNum > 0 && skip > 0)
+                {
+                    return orderBy(query).Take(takesNum).Skip(skip).ToList();
+                }
+                if (takesNum > 0)
+                {
+                    return orderBy(query).Take(takesNum).ToList();
+                }
+                if (skip > 0)
+                {
+                    return orderBy(query).Skip(skip).ToList();
+                }
+                else
+                {
+                    return orderBy(query).ToList();
+
+                }
+
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+
+
+        async Task<IEnumerable<T>> IGenericRepositoryAsync<T>.GetAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int skip, int takesNum, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = dbContext.Set<T>();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                if (takesNum > 0 && skip > 0)
+                {
+                    return await orderBy(query).Skip(skip).Take(takesNum).ToListAsync();
+                }
+                if (takesNum > 0)
+                {
+                    return await orderBy(query).Take(takesNum).ToListAsync();
+                }
+                if (skip > 0)
+                {
+                    return await orderBy(query).Skip(skip).ToListAsync();
+                }
+                else
+                {
+                    return await orderBy(query).ToListAsync();
+
+                }
+
+            }
+            else
+            {
+                return await query.ToListAsync();
+            }
         }
     }
 
