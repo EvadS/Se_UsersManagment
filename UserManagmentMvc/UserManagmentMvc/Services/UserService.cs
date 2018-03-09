@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using UserManagment.DataEntities.Entities;
+using UserManagment.Models;
 using UserManagmentMvc.Abstract;
-using UserManagmentMvc.EF.Entities;
-using UserManagmentMvc.Models.ViewModel;
+
 using UserManagmentMvc.Repositories;
 
 namespace UserManagmentMvc.Services
@@ -14,14 +15,11 @@ namespace UserManagmentMvc.Services
     {
         private BaseRepository<User> repo;
 
-        public UserService()
-        {
-            repo = new UserRepository();
-        }
+       /*
 
         public async Task<List<UserVM>> GetUsersListAsync()
         {
-            List<UserManagmentMvc.Models.ViewModel.UserVM> result = null;
+            List<UserVM> result = null;
 
             var res = (await repo.GetListAsync())
                 .Select(x => new UserVM
@@ -212,6 +210,6 @@ namespace UserManagmentMvc.Services
         public async Task<bool> ExistUser(int userID)
         {
             return await repo.GetItemAsync(userID) != null;
-        }
+        }*/
     }
 }

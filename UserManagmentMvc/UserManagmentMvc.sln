@@ -3,11 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentMvc", "UserManagmentMvc\UserManagmentMvc.csproj", "{0B35AE38-F392-4D2C-B9E9-4539D682D133}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.Web", "UserManagmentMvc\UserManagment.Web.csproj", "{0B35AE38-F392-4D2C-B9E9-4539D682D133}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{906632D0-C88F-42E4-9474-4FA337D20CE5}"
 	ProjectSection(SolutionItems) = preProject
 		insert_data_script.txt = insert_data_script.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.Models", "UserManagment.Models\UserManagment.Models.csproj", "{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.DataEntities", "UserManagment.DataEntities\UserManagment.DataEntities.csproj", "{7895D440-D4A2-427F-B4CC-CE1D1B791589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.DAL", "UserManagment.DAL\UserManagment.DAL.csproj", "{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589} = {7895D440-D4A2-427F-B4CC-CE1D1B791589}
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29} = {217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.BLL", "UserManagment.BLL\UserManagment.BLL.csproj", "{17EB1794-455D-4372-AECF-B738F39F4EDA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589} = {7895D440-D4A2-427F-B4CC-CE1D1B791589}
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29} = {217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0} = {33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}
 	EndProjectSection
 EndProject
 Global
@@ -20,6 +37,22 @@ Global
 		{0B35AE38-F392-4D2C-B9E9-4539D682D133}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B35AE38-F392-4D2C-B9E9-4539D682D133}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B35AE38-F392-4D2C-B9E9-4539D682D133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EB1794-455D-4372-AECF-B738F39F4EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EB1794-455D-4372-AECF-B738F39F4EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EB1794-455D-4372-AECF-B738F39F4EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EB1794-455D-4372-AECF-B738F39F4EDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using UserManagmentMvc.Models.ViewModel;
-
-using UserManagmentMvc.Services;
+using UserManagment.BLL.Abstract;
+using UserManagment.Models;
 
 namespace UserManagmentMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private UserService userService;
+        private IUserService businesService;
 
-
-        public HomeController()
+        public HomeController(IUserService _businesService)
         {
-            userService = new UserService();          
+            businesService = _businesService;           
         }
 
         // GET: Home
-        public async Task<ActionResult> Index()
+        public  ActionResult Index()
         {
-            IEnumerable<UserVM> usersList = await userService.GetUsersListAsync();
-            return View(usersList);
+
+            var usersList = businesService.GetUsersList();
+            return  View(usersList);
         }
 
         public ActionResult Create()
@@ -39,13 +32,13 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public ActionResult Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 string url = Url.Action("Index", "Home");
-                var res =   userService.CreateUserAsync(user);
-                if (res.Result)
+                var res = businesService.CreateUser(user);
+                if (res)
                 {
                     return Json(new { success = true, url = url });
                 }
@@ -59,7 +52,7 @@ namespace UserManagmentMvc.Controllers
 
 
         #region edit actions 
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -67,7 +60,7 @@ namespace UserManagmentMvc.Controllers
             }
 
             int intValue = id.Value;
-            var user = await userService.GetUserAsync(intValue);
+            var user =  businesService.GetUser(intValue);
 
             if (user == null)
             {
@@ -81,12 +74,12 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public  ActionResult Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 string url = Url.Action("Index", "Home");
-                if (await userService.UpdateUserAsync(user))
+                if ( businesService.UpdateUser(user))
                 {
                     return Json(new { success = true, url = url });
                 }
@@ -100,7 +93,7 @@ namespace UserManagmentMvc.Controllers
         #endregion
 
         #region delete 
-          public async  Task<ActionResult> Delete(int? id)
+          public ActionResult Delete(int? id)
           {
               if (id == null)
               {
@@ -108,7 +101,7 @@ namespace UserManagmentMvc.Controllers
               }
 
               int intValue = id.Value;
-              var user =  await userService.GetUserAsync(intValue);
+              var user =   businesService.GetUser(intValue);
 
               if (user == null)
               {
@@ -122,7 +115,7 @@ namespace UserManagmentMvc.Controllers
         [HttpPost, ActionName("Delete")] 
         public ActionResult DeleteConfirmed(int id)
         {
-            var res = userService.DeleteAsync(id);
+            var res = businesService.DeleteUser(id);
          
             string url = Url.Action("Index", "Home");
 
