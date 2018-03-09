@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -56,16 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\BusinessLogic.cs" />
-    <Compile Include="BusinessLogicModule.cs" />
+    <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="Concrete\BusinessLogic.cs" />
     <Compile Include="GenericBusinessLogic.cs" />
-    <Compile Include="NLogLoggerNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nlog.desktop.config" />
-    <None Include="nlog.web.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

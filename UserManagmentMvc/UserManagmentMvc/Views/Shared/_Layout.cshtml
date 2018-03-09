@@ -4,9 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />\   
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" /> 
 
     @Styles.Render("~/Content/css")  
+    <script src="~/scripts/jquery-2.1.1.min.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/modalForm")
+    @Scripts.Render("~/bundles/datetimepicker")
+ 
  
 </head>
 <body>
@@ -30,13 +38,7 @@
     <div class="container body-content">
         @RenderBody()
 
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-
-        @Scripts.Render("~/bundles/datetimepicker")
-        @Scripts.Render("~/bundles/modalForm")
-        @RenderSection("scripts", required: false)
+ 
 
         <hr />
         <footer>

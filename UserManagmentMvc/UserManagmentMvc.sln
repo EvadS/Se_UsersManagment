@@ -15,8 +15,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.DataEntities", "UserManagment.DataEntities\UserManagment.DataEntities.csproj", "{7895D440-D4A2-427F-B4CC-CE1D1B791589}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.DAL", "UserManagment.DAL\UserManagment.DAL.csproj", "{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589} = {7895D440-D4A2-427F-B4CC-CE1D1B791589}
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29} = {217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagment.BLL", "UserManagment.BLL\UserManagment.BLL.csproj", "{17EB1794-455D-4372-AECF-B738F39F4EDA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7895D440-D4A2-427F-B4CC-CE1D1B791589} = {7895D440-D4A2-427F-B4CC-CE1D1B791589}
+		{217D9B59-975C-4C3B-8CC3-ED1A2AB34B29} = {217D9B59-975C-4C3B-8CC3-ED1A2AB34B29}
+		{33C3E4BF-A86C-490F-9C8D-C71093BD2BE0} = {33C3E4BF-A86C-490F-9C8D-C71093BD2BE0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

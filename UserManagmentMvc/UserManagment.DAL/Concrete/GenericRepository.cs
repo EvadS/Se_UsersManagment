@@ -221,13 +221,7 @@ namespace UserManagment.DAL.Concrete
 
             Save();
             DbContext.Configuration.AutoDetectChangesEnabled = true;
-        }
-             
-
-        public Task<IEnumerable<TEntity>> GetListAsync()
-        {
-            throw new NotImplementedException();
-        }
+        }      
     }
 }
 

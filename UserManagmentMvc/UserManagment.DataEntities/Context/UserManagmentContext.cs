@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserManagment.DataEntities.Entities;
 
 namespace UserManagment.DataEntities
 {
-    class UserManagmentContext : DbContext, IDbContext
+    public class UserManagmentContext : DbContext, IDbContext
     {      
 
         public UserManagmentContext() : base("DbConnection")

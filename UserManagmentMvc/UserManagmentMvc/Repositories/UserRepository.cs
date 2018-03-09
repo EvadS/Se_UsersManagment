@@ -10,10 +10,10 @@ using UserManagmentMvc.Abstract;
 
 namespace UserManagmentMvc.Repositories
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository 
     {
 
-        private UserManagmentContext db;
+      /*  private UserManagmentContext db;
         private bool disposed = false;
 
         public UserRepository()
@@ -87,6 +87,6 @@ namespace UserManagmentMvc.Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
+        }*/
     }
 }

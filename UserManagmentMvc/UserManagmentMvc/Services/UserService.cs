@@ -15,10 +15,7 @@ namespace UserManagmentMvc.Services
     {
         private BaseRepository<User> repo;
 
-        public UserService()
-        {
-            repo = new UserRepository();
-        }
+       /*
 
         public async Task<List<UserVM>> GetUsersListAsync()
         {
@@ -213,6 +210,6 @@ namespace UserManagmentMvc.Services
         public async Task<bool> ExistUser(int userID)
         {
             return await repo.GetItemAsync(userID) != null;
-        }
+        }*/
     }
 }

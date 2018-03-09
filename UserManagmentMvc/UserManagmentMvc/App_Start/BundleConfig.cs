@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace UserManagmentMvc.App_Start
 {
@@ -27,7 +23,7 @@ namespace UserManagmentMvc.App_Start
                        "~/scripts/jquery.datetimepicker.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modalForm").Include(
-                      "~/scripts/jquery.modalForm.js"));
+                      "~/scripts/modalForm.js"));
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

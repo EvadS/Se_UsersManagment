@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace UserManagment.DAL.Abstract
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
-        Task<IEnumerable<TEntity>> GetListAsync();
-
         DbContext GetContext();
         DbSet<TEntity> GetDbSet();
         TEntity First(Expression<Func<TEntity, bool>> predicate);

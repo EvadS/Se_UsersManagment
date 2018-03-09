@@ -1,4 +1,7 @@
 ﻿using Autofac;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +22,13 @@ namespace UserManagmentMvc
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // внедрение зависимостей
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+
+            kernel.Unbind<ModelValidatorProvider>();
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
 
         }
     }
