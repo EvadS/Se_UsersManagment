@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using UserManagment.BLL.Abstract;
 using UserManagment.Models;
@@ -7,52 +9,47 @@ namespace UserManagmentMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserService businesService;
+        private IUserServiceAsync businesService;
 
-        public HomeController(IUserService _businesService)
+        public HomeController(IUserServiceAsync _businesService)
         {
-            businesService = _businesService;           
+            businesService = _businesService;
         }
 
         // GET: Home
-        public  ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-
-            var usersList = businesService.GetUsersList();
-            return  View(usersList);
+            IEnumerable<UserVM> usersList = await businesService.GetUsersList();
+            return View(usersList);
         }
 
         public ActionResult Create()
         {
             var user = new UserVM();
             ViewBag.ModalTitle = "Create new customer";
-
             return PartialView("_EditPerson", user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public async Task<ActionResult> Create([Bind(Include = "Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 string url = Url.Action("Index", "Home");
-                var res = businesService.CreateUser(user);
+                var res = await businesService.CreateUser(user);
                 if (res)
                 {
                     return Json(new { success = true, url = url });
                 }
-
-                return   Json(new { success = false, url = url });
             }
-
 
             return PartialView("_EditPerson", user);
         }
 
 
         #region edit actions 
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -60,7 +57,7 @@ namespace UserManagmentMvc.Controllers
             }
 
             int intValue = id.Value;
-            var user =  businesService.GetUser(intValue);
+            var user = await businesService.GetUser(intValue);
 
             if (user == null)
             {
@@ -74,12 +71,12 @@ namespace UserManagmentMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,LastName,MidleName,PhoneNumber,IsEmployed,OrganisationName,StartOnUTc")] UserVM user)
         {
             if (ModelState.IsValid)
             {
                 string url = Url.Action("Index", "Home");
-                if ( businesService.UpdateUser(user))
+                if (await businesService.UpdateUser(user))
                 {
                     return Json(new { success = true, url = url });
                 }
@@ -93,30 +90,30 @@ namespace UserManagmentMvc.Controllers
         #endregion
 
         #region delete 
-          public ActionResult Delete(int? id)
-          {
-              if (id == null)
-              {
-                  return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-              }
-
-              int intValue = id.Value;
-              var user =   businesService.GetUser(intValue);
-
-              if (user == null)
-              {
-                  return HttpNotFound();
-              }
-
-              return PartialView("_Delete", user);
-          }
-
-      
-        [HttpPost, ActionName("Delete")] 
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            var res = businesService.DeleteUser(id);
-         
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            int intValue = id.Value;
+            var user = await businesService.GetUser(intValue);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_Delete", user);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            var res = await businesService.DeleteUser(id);
+
             string url = Url.Action("Index", "Home");
 
             TempData["Message"] = "Record was deleted.";

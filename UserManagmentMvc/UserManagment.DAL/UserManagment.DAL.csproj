@@ -50,9 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IGenericRepository.cs" />
+    <Compile Include="Abstract\IGenericRepositoryAsync.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\GenericRepository.cs" />
+    <Compile Include="Concrete\GenericRepositoryAsync.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
+    <Compile Include="Abstract\IUserRepositoryAsync.cs" />
+    <Compile Include="Concrete\UserRepositoryAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

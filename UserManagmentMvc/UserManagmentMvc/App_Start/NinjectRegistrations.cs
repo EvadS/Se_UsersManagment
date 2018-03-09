@@ -11,11 +11,15 @@ namespace UserManagmentMvc.App_Start
     public class NinjectRegistrations : NinjectModule
     {
         public override void Load()
-        {
-          
+        {          
             Bind<IDbContext>().To<UserManagmentContext>();
+
             Bind<IUserRepository>().To<UserRepository>();
             Bind<IUserService>().To<UserService>();
+
+            // async
+            Bind<IUserRepositoryAsync>().To<UserRepositoryAsync>();
+            Bind<IUserServiceAsync>().To<UserServiceAsync>();
         }
     }
 }
