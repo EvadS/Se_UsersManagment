@@ -1,0 +1,16 @@
+{
+  "name": "ASP.NET",
+  "version": "0.0.0",
+  "authors": [ "SkiEA" ],
+  "description": "bpwer cpnfig file",
+	"private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1",
+    "jquery-validate":"1.17.0",
+    "jquery-validation-unobtrusive":"3.2.6" ,
+    "modernizr": "*",
+    "jquery-datetimepicker": "*",
+    "lodash": "4.17.5"
+  }
+}
